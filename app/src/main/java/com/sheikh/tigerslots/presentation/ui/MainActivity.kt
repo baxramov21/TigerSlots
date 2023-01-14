@@ -1,8 +1,8 @@
-package com.sheikh.tigerslots
+package com.sheikh.tigerslots.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.sheikh.tigerslots.ui.main.MainFragment
+import com.sheikh.tigerslots.R
 
 class MainActivity : AppCompatActivity() {
 
