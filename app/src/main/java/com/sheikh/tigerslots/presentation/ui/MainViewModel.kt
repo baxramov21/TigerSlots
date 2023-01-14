@@ -1,4 +1,4 @@
-package com.sheikh.tigerslots.ui.main
+package com.sheikh.tigerslots.presentation.ui
 
 import androidx.lifecycle.ViewModel
 
