@@ -1,4 +1,8 @@
 package com.sheikh.tigerslots.domain.usecases
 
-class GetDepositUseCase {
+import com.sheikh.tigerslots.domain.repository.GameRepository
+
+class GetDepositUseCase(private val repository: GameRepository) {
+
+    operator fun invoke(): Int = repository.getDeposit()
 }
