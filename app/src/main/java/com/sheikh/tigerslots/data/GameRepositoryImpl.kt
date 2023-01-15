@@ -1,27 +1,40 @@
 package com.sheikh.tigerslots.data
 
+import android.app.Application
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.Transformations
+import com.sheikh.tigerslots.data.db.BetAmountDbModel
+import com.sheikh.tigerslots.data.db.GameDataDbModel
+import com.sheikh.tigerslots.data.db.GameDatabase
 import com.sheikh.tigerslots.domain.entities.GameData
 import com.sheikh.tigerslots.domain.repository.GameRepository
 
-object GameRepositoryImpl : GameRepository {
+class GameRepositoryImpl(application: Application) : GameRepository {
 
-    override fun getBetAmount(): Int {
-        TODO("Not yet implemented")
+    private val db = GameDatabase.getInstance(application).getDao()
+
+    override fun getBetAmount(): LiveData<Int> {
+        return db.getBet()
     }
 
-    override fun getDeposit(): Int {
-        TODO("Not yet implemented")
+    override fun getDeposit(): LiveData<Int> {
+        return db.getDeposit()
     }
 
-    override fun getWinAmount(): Int {
-        TODO("Not yet implemented")
+    override fun getWinAmount(): LiveData<Int> {
+        return db.getProfit()
     }
 
     override fun increaseBet(upValue: Int) {
-        TODO("Not yet implemented")
+        getBetAmount().value?.let {
+            val newBetAmount = it + 1
+            val newBetValue = BetAmountDbModel(newBetAmount)
+            db.setBet(newBetValue)
+        }
     }
 
     override fun startGame(gameData: GameData) {
-        TODO("Not yet implemented")
+
     }
 }
