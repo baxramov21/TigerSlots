@@ -8,25 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.sheikh.tigerslots.R
 
-class MainFragment : Fragment() {
+class GameFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = GameFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: GameViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_game, container, false)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }
