@@ -4,9 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
-import com.sheikh.tigerslots.data.db.BetAmountDbModel
-import com.sheikh.tigerslots.data.db.GameDataDbModel
-import com.sheikh.tigerslots.data.db.GameDatabase
+import com.sheikh.tigerslots.data.db.*
 import com.sheikh.tigerslots.domain.entities.GameData
 import com.sheikh.tigerslots.domain.repository.GameRepository
 
@@ -24,6 +22,21 @@ class GameRepositoryImpl(application: Application) : GameRepository {
 
     override fun getWinAmount(): LiveData<Int> {
         return db.getProfit()
+    }
+
+    override fun setDeposit(updatedDeposit: Int) {
+        val newDeposit = DepositDbModel(updatedDeposit)
+        db.setDeposit(newDeposit)
+    }
+
+    override fun setWinState(win: Boolean) {
+        val winState = WinStateDbModel(win)
+        db.setWin(winState)
+    }
+
+    override fun setProfit(profit: Int) {
+        val profitAmount = ProfitAmountDbModel(profit)
+        db.setProfit(profitAmount)
     }
 
     override fun increaseBet(upValue: Int) {
