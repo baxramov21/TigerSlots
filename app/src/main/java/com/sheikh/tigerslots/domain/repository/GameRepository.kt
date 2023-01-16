@@ -14,4 +14,10 @@ interface GameRepository {
     fun increaseBet(upValue: Int)
 
     fun startGame(gameData: GameData)
+
+    fun setDeposit(updatedDeposit: Int)
+
+    fun setProfit(profit: Int)
+
+    fun setWinState(win: Boolean)
 }
