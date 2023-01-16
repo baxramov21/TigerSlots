@@ -2,10 +2,11 @@ package com.sheikh.tigerslots.data
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
 import com.sheikh.tigerslots.data.db.*
-import com.sheikh.tigerslots.domain.entities.GameData
+import com.sheikh.tigerslots.data.db_models.BetAmountDbModel
+import com.sheikh.tigerslots.data.db_models.DepositDbModel
+import com.sheikh.tigerslots.data.db_models.ProfitAmountDbModel
+import com.sheikh.tigerslots.data.db_models.WinStateDbModel
 import com.sheikh.tigerslots.domain.repository.GameRepository
 
 class GameRepositoryImpl(application: Application) : GameRepository {
