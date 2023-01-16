@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.sheikh.tigerslots.data.db_models.*
 import com.sheikh.tigerslots.domain.entities.GameData
 
 @Dao

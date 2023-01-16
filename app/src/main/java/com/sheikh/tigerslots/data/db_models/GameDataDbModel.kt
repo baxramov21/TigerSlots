@@ -1,4 +1,4 @@
-package com.sheikh.tigerslots.data.db
+package com.sheikh.tigerslots.data.db_models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
