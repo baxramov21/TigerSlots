@@ -47,7 +47,16 @@ class GameRepositoryImpl(application: Application) : GameRepository {
         }
     }
 
-    override fun startGame(gameData: GameData) {
-
+    override fun startGame(
+        listOfImageIDs: List<Int>,
+        listOfImageViewPositions: List<Int>
+    ): List<Int> {
+        val result = mutableListOf<Int>()
+        if (listOfImageIDs.size == listOfImageViewPositions.size) {
+            for (position in listOfImageViewPositions) {
+                result.add(position - 1, listOfImageIDs.random())
+            }
+        }
+        return result
     }
 }

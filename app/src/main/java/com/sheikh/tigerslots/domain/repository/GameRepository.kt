@@ -13,7 +13,10 @@ interface GameRepository {
 
     fun increaseBet(upValue: Int)
 
-    fun startGame(gameData: GameData)
+    fun startGame(
+        listOfImageIDs: List<Int>,
+        listOfImageViewPositions: List<Int>
+    ): List<Int>
 
     fun setDeposit(updatedDeposit: Int)
 
