@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.sheikh.tigerslots.data.db_models.GameDataDbModel
+import com.sheikh.tigerslots.data.db_models.*
 
-@Database(entities = [GameDataDbModel::class], version = 1, exportSchema = false)
+@Database(entities = [GameDataDbModel::class, DepositDbModel::class, BetAmountDbModel::class, WinStateDbModel::class, ProfitAmountDbModel::class], version = 1, exportSchema = false)
 abstract class GameDatabase : RoomDatabase() {
 
     abstract fun getDao(): GameDao
