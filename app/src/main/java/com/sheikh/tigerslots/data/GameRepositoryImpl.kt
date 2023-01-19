@@ -24,7 +24,7 @@ class GameRepositoryImpl(application: Application) : GameRepository {
 
     override fun getDeposit(): LiveData<Int> =
         Transformations.map(db.getDeposit()) {
-            mapper.mapDepositToEntity(it)
+            mapper.mapDbModelToEntity(it)
         }
 
     override fun getWinAmount(): LiveData<Int> =

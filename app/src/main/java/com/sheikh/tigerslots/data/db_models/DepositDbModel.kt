@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "deposit_table")
 data class DepositDbModel(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    var id: Int = 0,
     val deposit: Int
-)
-//    : DbModelInstance(deposit)
+): DbModelInstance(deposit)
