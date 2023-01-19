@@ -24,7 +24,7 @@ class GameRepositoryImpl(application: Application) : GameRepository {
 
     override fun getDeposit(): LiveData<Int> =
         Transformations.map(db.getDeposit()) {
-            mapper.mapDbModelToEntity(it)
+            mapper.mapDepositToEntity(it)
         }
 
     override fun getWinAmount(): LiveData<Int> =
@@ -33,24 +33,24 @@ class GameRepositoryImpl(application: Application) : GameRepository {
         }
 
     override fun setDeposit(updatedDeposit: Int) {
-        val newDeposit = DepositDbModel(updatedDeposit)
+        val newDeposit = DepositDbModel(deposit = updatedDeposit)
         db.setDeposit(newDeposit)
     }
 
     override fun setWinState(win: Boolean) {
-        val winState = WinStateDbModel(win)
+        val winState = WinStateDbModel(win = win)
         db.setWin(winState)
     }
 
     override fun setProfit(profit: Int) {
-        val profitAmount = ProfitAmountDbModel(profit)
+        val profitAmount = ProfitAmountDbModel(profit = profit)
         db.setProfit(profitAmount)
     }
 
     override fun increaseBet(upValue: Int) {
         getBetAmount().value?.let {
             val newBetAmount = it + 1
-            val newBetValue = BetAmountDbModel(newBetAmount)
+            val newBetValue = BetAmountDbModel(bet = newBetAmount)
             db.setBet(newBetValue)
         }
     }

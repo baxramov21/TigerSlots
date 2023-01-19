@@ -16,9 +16,6 @@ interface GameDao {
     @Query("SELECT * FROM deposit_table")
     fun getDeposit(): LiveData<DepositDbModel>
 
-    @Query("SELECT * FROM bet_table")
-    fun getBet(): LiveData<BetAmountDbModel>
-
     @Query("SELECT * FROM wins_table")
     fun getWinState(): LiveData<WinStateDbModel>
 
@@ -39,4 +36,7 @@ interface GameDao {
 
     @Insert
     fun setProfit(profitAmountDbModel: ProfitAmountDbModel)
+
+    @Query("SELECT * FROM bet_table")
+    fun getBet(): LiveData<BetAmountDbModel>
 }

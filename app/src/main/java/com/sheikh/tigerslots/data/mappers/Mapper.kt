@@ -9,6 +9,11 @@ class Mapper {
         return dbModel.dbModelValue
     }
 
+    fun mapDepositToEntity(depositDbModel: DepositDbModel): Int {
+        return depositDbModel.deposit
+    }
+
+
     fun mapWinStateToEntity(winStateDbModel: WinStateDbModel): Boolean {
         return winStateDbModel.win
     }
