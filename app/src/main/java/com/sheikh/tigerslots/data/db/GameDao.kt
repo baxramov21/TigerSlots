@@ -11,19 +11,19 @@ import com.sheikh.tigerslots.domain.entities.GameData
 interface GameDao {
 
     @Query("SELECT * FROM game_data_table")
-    fun getGameData(): LiveData<GameData>
+    fun getGameData(): LiveData<GameDataDbModel>
 
     @Query("SELECT * FROM deposit_table")
-    fun getDeposit(): LiveData<Int>
+    fun getDeposit(): LiveData<DepositDbModel>
 
     @Query("SELECT * FROM bet_table")
-    fun getBet(): LiveData<Int>
+    fun getBet(): LiveData<BetAmountDbModel>
 
     @Query("SELECT * FROM wins_table")
-    fun getWin(): LiveData<Int>
+    fun getWinState(): LiveData<WinStateDbModel>
 
     @Query("SELECT * FROM profit_table")
-    fun getProfit(): LiveData<Int>
+    fun getProfit(): LiveData<ProfitAmountDbModel>
 
     @Insert()
     fun setGameData(gameData: GameDataDbModel)
