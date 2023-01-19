@@ -5,8 +5,8 @@ import com.sheikh.tigerslots.domain.repository.GameRepository
 
 class StartGameUseCase(private val repository: GameRepository) {
 
-    operator fun invoke(listOfImageIDs: List<Int>, listOfImageViewPositions: List<Int>)
+    operator fun invoke(listOfImageIDs: List<Int>)
             : List<Int> {
-        return repository.startGame(listOfImageIDs, listOfImageViewPositions)
+        return repository.startGame(listOfImageIDs)
     }
 }
