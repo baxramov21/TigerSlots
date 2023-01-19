@@ -60,7 +60,7 @@ class GameViewModel(private val application: Application) : ViewModel() {
         setWinStateUseCase(win)
     }
 
-    fun startGame(listOfImageIDs: List<Int>, listOfImagePositions: List<Int>) {
-        startGameUseCase(listOfImageIDs, listOfImagePositions)
+    fun startGame(listOfImageIDs: List<Int>) {
+        startGameUseCase(listOfImageIDs)
     }
 }
