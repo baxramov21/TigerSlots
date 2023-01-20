@@ -20,12 +20,12 @@ class GameFragment : Fragment() {
         ViewModelFactory(requireActivity().application)
     }
 
-    private val betAmount by lazy {
-        gameViewModel.betAmount.value
-    }
-
     private val gameViewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
+    }
+
+    private val betAmount by lazy {
+        gameViewModel.betAmount.value
     }
 
     override fun onCreateView(
