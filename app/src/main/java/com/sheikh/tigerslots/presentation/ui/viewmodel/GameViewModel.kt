@@ -42,6 +42,9 @@ class GameViewModel(private val application: Application) : ViewModel() {
 
     init {
         getData()
+        setNewDeposit(100)
+        setProfit(5)
+        increaseBet(10)
     }
 
     fun setNewDeposit(newDeposit: Int) {
@@ -60,7 +63,7 @@ class GameViewModel(private val application: Application) : ViewModel() {
         setWinStateUseCase(win)
     }
 
-    fun startGame(listOfImageIDs: List<Int>) {
-        startGameUseCase(listOfImageIDs)
+    fun startGame(listOfImageIDs: List<Int>): List<Int> {
+        return startGameUseCase(listOfImageIDs)
     }
 }

@@ -19,9 +19,9 @@ fun bindBetAmount(textView: TextView, betAmount: Int) {
 }
 
 @BindingAdapter("showWinAmount")
-fun bindWinAmount(textView: TextView, betAmount: Int) {
+fun bindWinAmount(textView: TextView, profit: Int) {
     val winAmountText =
-        String.format(getResources(textView).getString(R.string.win_amount), betAmount)
+        String.format(getResources(textView).getString(R.string.win_amount), profit)
     textView.text = winAmountText
 }
 

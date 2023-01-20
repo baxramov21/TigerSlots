@@ -6,14 +6,24 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.sheikh.tigerslots.data.db_models.*
 
-@Database(entities = [GameDataDbModel::class, DepositDbModel::class, BetAmountDbModel::class, WinStateDbModel::class, ProfitAmountDbModel::class], version = 1, exportSchema = false)
+@Database(
+    entities = [
+        GameDataDbModel::class,
+        DepositDbModel::class,
+        BetAmountDbModel::class,
+        WinStateDbModel::class,
+        ProfitAmountDbModel::class
+    ],
+    version = 1,
+    exportSchema = false
+)
 abstract class GameDatabase : RoomDatabase() {
 
     abstract fun getDao(): GameDao
 
     companion object {
 
-        private val DB_NAME: String = "game.db"
+        private const val DB_NAME: String = "game.db"
         private var INSTANCE: GameDatabase? = null
         private val LOCK = Any()
 
@@ -30,7 +40,9 @@ abstract class GameDatabase : RoomDatabase() {
                         application,
                         GameDatabase::class.java,
                         DB_NAME
-                    ).build()
+                    )
+                        .allowMainThreadQueries()
+                        .build()
                 INSTANCE = db
                 return db
             }
