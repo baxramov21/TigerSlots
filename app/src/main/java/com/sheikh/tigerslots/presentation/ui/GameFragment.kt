@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.sheikh.tigerslots.R
 import com.sheikh.tigerslots.databinding.FragmentGameBinding
 import com.sheikh.tigerslots.presentation.ui.viewmodel.GameViewModel
 import com.sheikh.tigerslots.presentation.ui.viewmodel.ViewModelFactory
@@ -21,7 +20,11 @@ class GameFragment : Fragment() {
         ViewModelFactory(requireActivity().application)
     }
 
-    private val viewModel by lazy {
+    private val betAmount by lazy {
+        gameViewModel.betAmount.value
+    }
+
+    private val gameViewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
     }
 
@@ -35,6 +38,25 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = gameViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        with(binding) {
+            buttonStartGame.setOnClickListener {
+
+            }
+
+            buttonUpBet.setOnClickListener {
+                increaseBetAmount()
+            }
+        }
+    }
+
+
+    private fun increaseBetAmount() {
+        betAmount?.let {
+            gameViewModel.increaseBet(it + 1)
+        }
     }
 
     override fun onDestroyView() {
