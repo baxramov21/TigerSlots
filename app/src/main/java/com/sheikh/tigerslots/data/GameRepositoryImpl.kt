@@ -1,10 +1,11 @@
 package com.sheikh.tigerslots.data
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
-import com.sheikh.tigerslots.data.db.*
+import com.sheikh.tigerslots.data.db.GameDatabase
 import com.sheikh.tigerslots.data.db_models.BetAmountDbModel
 import com.sheikh.tigerslots.data.db_models.DepositDbModel
 import com.sheikh.tigerslots.data.db_models.ProfitAmountDbModel
@@ -48,11 +49,11 @@ class GameRepositoryImpl(application: Application) : GameRepository {
     }
 
     override fun increaseBet(upValue: Int) {
-        getBetAmount().value?.let {
-            val newBetAmount = it + 1
-            val newBetValue = BetAmountDbModel(bet = newBetAmount)
-            db.setBet(newBetValue)
-        }
+//        getBetAmount().value?.let {
+//            val newBetAmount = it + 1
+//        val newBetValue = BetAmountDbModel(bet = newBetAmount)
+        db.setBet(BetAmountDbModel(bet = upValue))
+//        }
     }
 
     override fun startGame(
@@ -63,12 +64,6 @@ class GameRepositoryImpl(application: Application) : GameRepository {
             result.add(listOfImageIDs.random())
         }
         return result
-    }
-
-    fun mergeLiveData(liveData: LiveData<Int>) = MediatorLiveData<Int>().apply {
-        addSource(liveData) {
-            value = it
-        }
     }
 
 }

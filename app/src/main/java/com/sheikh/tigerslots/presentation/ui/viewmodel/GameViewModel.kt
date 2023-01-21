@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sheikh.tigerslots.data.GameRepositoryImpl
 import com.sheikh.tigerslots.domain.usecases.*
 
@@ -39,14 +40,10 @@ class GameViewModel(private val application: Application) : ViewModel() {
         _deposit.value = getDepositUseCase().value
         _betAmount.value = getBetAmountUseCase().value
         _winAmount.value = getWinAmountUseCase().value
-        val betAmount = _betAmount.value
-        val deposit = _deposit.value
-        val winAmount = _winAmount.value
     }
 
     init {
         setNewDeposit(100)
-        setProfit(5)
         increaseBet(10)
         getData()
     }
@@ -69,5 +66,9 @@ class GameViewModel(private val application: Application) : ViewModel() {
 
     fun startGame(listOfImageIDs: List<Int>): List<Int> {
         return startGameUseCase(listOfImageIDs)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
     }
 }
