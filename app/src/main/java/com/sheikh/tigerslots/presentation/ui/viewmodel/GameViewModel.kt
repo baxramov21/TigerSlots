@@ -1,6 +1,7 @@
 package com.sheikh.tigerslots.presentation.ui.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -38,13 +39,16 @@ class GameViewModel(private val application: Application) : ViewModel() {
         _deposit.value = getDepositUseCase().value
         _betAmount.value = getBetAmountUseCase().value
         _winAmount.value = getWinAmountUseCase().value
+        val betAmount = _betAmount.value
+        val deposit = _deposit.value
+        val winAmount = _winAmount.value
     }
 
     init {
-        getData()
         setNewDeposit(100)
         setProfit(5)
         increaseBet(10)
+        getData()
     }
 
     fun setNewDeposit(newDeposit: Int) {
