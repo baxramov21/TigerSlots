@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Tiger Slots</string>
-    <string name="cash">Deposit: %s 0 $</string>
-    <string name="bet_amount">Bet: %s 0 $</string>
-    <string name="win_amount">Win: %s 0 $</string>
+    <string name="cash">Deposit: %d 0 $</string>
+    <string name="bet_amount">Bet: %d 0 $</string>
+    <string name="win_amount">Win: %d 0 $</string>
     <string name="up_bet">Up bet</string>
     <string name="spin_slots">Spin slots</string>
     <string name="cash_logo">Cash logo</string>
