@@ -91,7 +91,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewCash"
+            android:id="@+id/textViewDeposit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -100,21 +100,23 @@
             android:textSize="22sp"
             app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
             app:layout_constraintStart_toEndOf="@id/imageViewCashLogo"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showDeposit="@{viewModel.deposit}" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        app:showDeposit="@{viewModel.deposit}"-->
 
         <TextView
             android:id="@+id/textViewBetAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bet_amount"
-            app:showBetAmount="@{viewModel.betAmount}"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@id/buttonUpBet"
             app:layout_constraintEnd_toStartOf="@+id/buttonStartGame"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
+
+        <!--        app:showBetAmount="@{viewModel.betAmount}"-->
 
         <Button
             android:id="@+id/buttonUpBet"
@@ -132,12 +134,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/win_amount"
-            app:showWinAmount="@{viewModel.winAmount}"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/buttonStartGame"
             app:layout_constraintTop_toBottomOf="@+id/imageViewWinLogo" />
+
+        <!--        app:showWinAmount="@{viewModel.winAmount}"-->
+
 
         <ImageView
             android:id="@+id/imageViewWinLogo"

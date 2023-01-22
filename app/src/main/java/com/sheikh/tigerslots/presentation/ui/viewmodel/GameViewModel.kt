@@ -24,29 +24,33 @@ class GameViewModel(private val application: Application) : ViewModel() {
     private val increaseBetUseCase = IncreaseBetUseCase(repository)
     private val startGameUseCase = StartGameUseCase(repository)
 
-    private val _deposit = MutableLiveData<Int>()
-    val deposit: LiveData<Int>
-        get() = _deposit
+//    private val _deposit = MutableLiveData<Int>()
+//    val deposit: LiveData<Int>
+//        get() = _deposit
+//
+//    private val _betAmount = MutableLiveData<Int>()
+//    val betAmount: LiveData<Int>
+//        get() = _betAmount
+//
+//    private val _winAmount = MutableLiveData<Int>()
+//    val winAmount: LiveData<Int>
+//        get() = _winAmount
 
-    private val _betAmount = MutableLiveData<Int>()
-    val betAmount: LiveData<Int>
-        get() = _betAmount
+    val deposit = getDepositUseCase()
+    val betAmount = getBetAmountUseCase()
+    val profit = getWinAmountUseCase()
 
-    private val _winAmount = MutableLiveData<Int>()
-    val winAmount: LiveData<Int>
-        get() = _winAmount
+//    private fun getData() {
+//        _deposit.value = getDepositUseCase().value
+//        _betAmount.value = getBetAmountUseCase().value
+//        _winAmount.value = getWinAmountUseCase().value
+//    }
 
-    private fun getData() {
-        _deposit.value = getDepositUseCase().value
-        _betAmount.value = getBetAmountUseCase().value
-        _winAmount.value = getWinAmountUseCase().value
-    }
-
-    init {
-        setNewDeposit(100)
-        increaseBet(10)
-        getData()
-    }
+//    init {
+//        setNewDeposit(60)
+//        increaseBet(10)
+//        getData()
+//    }
 
     fun setNewDeposit(newDeposit: Int) {
         setDepositUseCase(newDeposit)
