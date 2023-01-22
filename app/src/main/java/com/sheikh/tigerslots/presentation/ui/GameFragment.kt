@@ -41,6 +41,9 @@ class GameFragment : Fragment() {
         binding.viewModel = gameViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        gameViewModel.deposit.observe(viewLifecycleOwner) {
+            binding.textViewDeposit.text = it.toString()
+        }
         with(binding) {
             buttonStartGame.setOnClickListener {
 

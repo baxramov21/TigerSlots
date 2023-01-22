@@ -1,11 +1,8 @@
 package com.sheikh.tigerslots.data.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.sheikh.tigerslots.data.db_models.*
-import com.sheikh.tigerslots.domain.entities.GameData
 
 @Dao
 interface GameDao {
@@ -13,7 +10,7 @@ interface GameDao {
     @Query("SELECT * FROM game_data_table")
     fun getGameData(): LiveData<GameDataDbModel>
 
-    @Query("SELECT * FROM deposit_table")
+    @Query("SELECT * FROM deposit_table ORDER BY id DESC LIMIT 1")
     fun getDeposit(): LiveData<DepositDbModel>
 
     @Query("SELECT * FROM wins_table")
@@ -28,8 +25,11 @@ interface GameDao {
     @Insert()
     fun setGameData(gameData: GameDataDbModel)
 
-    @Insert
-    fun setDeposit(depositDbModel: DepositDbModel)
+//    @Query("UPDATE deposit_table SET deposit=:newDepositValue")
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+
+    @Upsert
+    fun setDeposit(newDepositDbModel: DepositDbModel)
 
     @Insert
     fun setBet(betAmountDbModel: BetAmountDbModel)
