@@ -46,11 +46,12 @@ class GameViewModel(private val application: Application) : ViewModel() {
 //        _winAmount.value = getWinAmountUseCase().value
 //    }
 
-//    init {
-//        setNewDeposit(60)
-//        increaseBet(10)
+    init {
+        setNewDeposit(60)
+        increaseBet(10)
+        setProfit(15)
 //        getData()
-//    }
+    }
 
     fun setNewDeposit(newDeposit: Int) {
         setDepositUseCase(newDeposit)
@@ -70,9 +71,5 @@ class GameViewModel(private val application: Application) : ViewModel() {
 
     fun startGame(listOfImageIDs: List<Int>): List<Int> {
         return startGameUseCase(listOfImageIDs)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
     }
 }

@@ -100,9 +100,9 @@
             android:textSize="22sp"
             app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
             app:layout_constraintStart_toEndOf="@id/imageViewCashLogo"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:showDeposit="@{viewModel.deposit}" />
 
-        <!--        app:showDeposit="@{viewModel.deposit}"-->
 
         <TextView
             android:id="@+id/textViewBetAmount"
@@ -114,9 +114,9 @@
             app:layout_constraintBottom_toTopOf="@id/buttonUpBet"
             app:layout_constraintEnd_toStartOf="@+id/buttonStartGame"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
+            app:layout_constraintTop_toTopOf="@+id/guidelineBottom"
+            app:showBetAmount="@{viewModel.betAmount}" />
 
-        <!--        app:showBetAmount="@{viewModel.betAmount}"-->
 
         <Button
             android:id="@+id/buttonUpBet"
@@ -138,9 +138,8 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/buttonStartGame"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewWinLogo" />
-
-        <!--        app:showWinAmount="@{viewModel.winAmount}"-->
+            app:layout_constraintTop_toBottomOf="@+id/imageViewWinLogo"
+            app:showWinAmount="@{viewModel.profit}" />
 
 
         <ImageView
