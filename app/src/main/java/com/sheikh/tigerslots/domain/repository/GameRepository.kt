@@ -15,7 +15,7 @@ interface GameRepository {
 
     fun startGame(listOfImageIDs: List<Int>): List<Int>
 
-    fun setDeposit(updatedDeposit: Int)
+    fun updateDeposit()
 
     fun setProfit(profit: Int)
 
