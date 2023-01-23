@@ -83,5 +83,4 @@ class GameRepositoryImpl(application: Application) : GameRepository {
     companion object {
         private const val DEFAULT_BET_AMOUNT = 10
     }
-
 }
