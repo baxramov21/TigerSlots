@@ -25,18 +25,15 @@ interface GameDao {
     @Insert()
     fun setGameData(gameData: GameDataDbModel)
 
-//    @Query("UPDATE deposit_table SET deposit=:newDepositValue")
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-
     @Upsert
     fun setDeposit(newDepositDbModel: DepositDbModel)
 
-    @Insert
+    @Upsert
     fun setBet(betAmountDbModel: BetAmountDbModel)
 
-    @Insert
+    @Upsert
     fun setWin(winStateDbModel: WinStateDbModel)
 
-    @Insert
+    @Upsert
     fun setProfit(profitAmountDbModel: ProfitAmountDbModel)
 }

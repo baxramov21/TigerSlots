@@ -1,9 +1,7 @@
 package com.sheikh.tigerslots.data
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
 import com.sheikh.tigerslots.data.db.GameDatabase
 import com.sheikh.tigerslots.data.db_models.BetAmountDbModel
@@ -33,9 +31,23 @@ class GameRepositoryImpl(application: Application) : GameRepository {
             mapper.mapDbModelToEntity(it)
         }
 
-    override fun setDeposit(updatedDeposit: Int) {
+    private fun setDeposit(updatedDeposit: Int) {
         val newDeposit = DepositDbModel(deposit = updatedDeposit)
         db.setDeposit(newDeposit)
+    }
+
+    override fun updateDeposit() {
+        val deposit = getDeposit().value
+        val betAmount = getBetAmount().value
+        val profit = getWinAmount().value
+        if (deposit != null && betAmount != null &&
+            profit != null
+        ) {
+            val newDeposit = (deposit - betAmount) + profit
+            setDeposit(newDeposit)
+        } else if (deposit == null) {
+            setDeposit(100)
+        }
     }
 
     override fun setWinState(win: Boolean) {
@@ -48,12 +60,14 @@ class GameRepositoryImpl(application: Application) : GameRepository {
         db.setProfit(profitAmount)
     }
 
-    override fun increaseBet(upValue: Int) {
-//        getBetAmount().value?.let {
-//            val newBetAmount = it + 1
-//        val newBetValue = BetAmountDbModel(bet = newBetAmount)
-        db.setBet(BetAmountDbModel(bet = upValue))
-//        }
+    override fun increaseBet() {
+        val betAmount = getBetAmount().value
+        val newBet = if (betAmount != null) {
+            betAmount + 1
+        } else {
+            DEFAULT_BET_AMOUNT
+        }
+        db.setBet(BetAmountDbModel(bet = newBet))
     }
 
     override fun startGame(
@@ -66,4 +80,7 @@ class GameRepositoryImpl(application: Application) : GameRepository {
         return result
     }
 
+    companion object {
+        private const val DEFAULT_BET_AMOUNT = 10
+    }
 }

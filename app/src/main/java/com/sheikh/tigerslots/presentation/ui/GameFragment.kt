@@ -57,9 +57,7 @@ class GameFragment : Fragment() {
 
 
     private fun increaseBetAmount() {
-        betAmount?.let {
-            gameViewModel.increaseBet(it + 1)
-        }
+        gameViewModel.increaseBet()
     }
 
     override fun onDestroyView() {

@@ -14,7 +14,7 @@ import com.sheikh.tigerslots.data.db_models.*
         WinStateDbModel::class,
         ProfitAmountDbModel::class
     ],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 abstract class GameDatabase : RoomDatabase() {
@@ -41,6 +41,7 @@ abstract class GameDatabase : RoomDatabase() {
                         GameDatabase::class.java,
                         DB_NAME
                     )
+                        .fallbackToDestructiveMigration()
                         .allowMainThreadQueries()
                         .build()
                 INSTANCE = db
