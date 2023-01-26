@@ -11,7 +11,7 @@ interface GameRepository {
 
     fun getWinAmount(): LiveData<Int>
 
-    fun increaseBet()
+    fun increaseBet(betAmount: Int)
 
     fun startGame(listOfImageIDs: List<Int>): List<Int>
 

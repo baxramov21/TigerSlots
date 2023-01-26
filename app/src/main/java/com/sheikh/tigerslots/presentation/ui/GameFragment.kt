@@ -24,10 +24,6 @@ class GameFragment : Fragment() {
         ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
     }
 
-    private val betAmount by lazy {
-        gameViewModel.betAmount.value
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,12 +37,8 @@ class GameFragment : Fragment() {
         binding.viewModel = gameViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        gameViewModel.deposit.observe(viewLifecycleOwner) {
-            binding.textViewDeposit.text = it.toString()
-        }
         with(binding) {
             buttonStartGame.setOnClickListener {
-
             }
 
             buttonUpBet.setOnClickListener {
