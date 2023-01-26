@@ -24,6 +24,8 @@ class GameViewModel(private val application: Application) : ViewModel() {
     val betAmount = getBetAmountUseCase()
     val profit = getWinAmountUseCase()
 
+    private var bet = 10
+
     init {
         updateDeposit()
         increaseBet()
@@ -39,7 +41,8 @@ class GameViewModel(private val application: Application) : ViewModel() {
     }
 
     fun increaseBet() {
-        increaseBetUseCase()
+        bet++
+        increaseBetUseCase(bet)
     }
 
     fun setWinState(win: Boolean) {
