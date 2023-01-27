@@ -1,6 +1,9 @@
 package com.sheikh.tigerslots.presentation.ui.viewmodel
 
 import android.app.Application
+import android.os.CountDownTimer
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sheikh.tigerslots.data.GameRepositoryImpl
 import com.sheikh.tigerslots.domain.usecases.*
@@ -19,6 +22,10 @@ class GameViewModel(private val application: Application) : ViewModel() {
 
     private val increaseBetUseCase = IncreaseBetUseCase(repository)
     private val startGameUseCase = StartGameUseCase(repository)
+
+    private val _imagesList = MutableLiveData<List<Int>>()
+    val imageList: LiveData<List<Int>>
+        get() = _imagesList ?: throw RuntimeException("_imagesList is null")
 
     val deposit = getDepositUseCase()
     val betAmount = getBetAmountUseCase()
@@ -49,7 +56,19 @@ class GameViewModel(private val application: Application) : ViewModel() {
         setWinStateUseCase(win)
     }
 
-    fun startGame(listOfImageIDs: List<Int>): List<Int> {
-        return startGameUseCase(listOfImageIDs)
+    fun startGame(listOfImageIDs: List<Int>) {
+        val timer = object : CountDownTimer(GAME_LENGTH_IN_SECONDS * 1000, 200) {
+            override fun onTick(p0: Long) {
+                _imagesList.postValue(startGameUseCase(listOfImageIDs))
+            }
+
+            override fun onFinish() {
+                _imagesList.postValue(startGameUseCase(listOfImageIDs))
+            }
+        }
+    }
+
+    companion object {
+        private const val GAME_LENGTH_IN_SECONDS = 4L
     }
 }
