@@ -58,11 +58,11 @@
             app:layout_constraintTop_toBottomOf="@id/guidelineTop"
             app:rowCount="3">
 
-<!--            <include-->
-<!--                android:id="@+id/slots_table"-->
-<!--                layout="@layout/slots_table"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent" />-->
+            <!--            <include-->
+            <!--                android:id="@+id/slots_table"-->
+            <!--                layout="@layout/slots_table"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="match_parent" />-->
 
             <androidx.gridlayout.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -95,7 +95,7 @@
                     <ImageView
                         android:id="@+id/imageView2"
                         style="@style/image_view_style"
-                        android:src="@drawable/real_coin" />
+                        android:src="@drawable/brilliant" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -122,7 +122,7 @@
                     <ImageView
                         android:id="@+id/imageView4"
                         style="@style/image_view_style"
-                        android:src="@drawable/brilliant2" />
+                        android:src="@drawable/brilliant" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -149,7 +149,7 @@
                     <ImageView
                         android:id="@+id/imageView6"
                         style="@style/image_view_style"
-                        android:src="@drawable/real_coin" />
+                        android:src="@drawable/brilliant" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -177,7 +177,7 @@
                     <ImageView
                         android:id="@+id/imageView8"
                         style="@style/image_view_style"
-                        android:src="@drawable/real_coin" />
+                        android:src="@drawable/brilliant" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -191,7 +191,7 @@
                     <ImageView
                         android:id="@+id/imageView9"
                         style="@style/image_view_style"
-                        android:src="@drawable/brilliant2" />
+                        android:src="@drawable/brilliant" />
 
                 </androidx.cardview.widget.CardView>
 

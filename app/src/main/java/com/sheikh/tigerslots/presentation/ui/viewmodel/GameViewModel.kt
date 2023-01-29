@@ -57,7 +57,10 @@ class GameViewModel(private val application: Application) : ViewModel() {
     }
 
     fun startGame(listOfImageIDs: List<Int>) {
-        val timer = object : CountDownTimer(GAME_LENGTH_IN_SECONDS * 1000, 200) {
+        val timer = object : CountDownTimer(
+            GAME_LENGTH_IN_SECONDS * 1000,
+            SLOTS_GENERATION_INTERVAL_IN_MILLI_SECONDS
+        ) {
             override fun onTick(p0: Long) {
                 _imagesList.postValue(startGameUseCase(listOfImageIDs))
             }
@@ -66,9 +69,11 @@ class GameViewModel(private val application: Application) : ViewModel() {
                 _imagesList.postValue(startGameUseCase(listOfImageIDs))
             }
         }
+        timer.start()
     }
 
     companion object {
         private const val GAME_LENGTH_IN_SECONDS = 4L
+        private const val SLOTS_GENERATION_INTERVAL_IN_MILLI_SECONDS = 120L
     }
 }

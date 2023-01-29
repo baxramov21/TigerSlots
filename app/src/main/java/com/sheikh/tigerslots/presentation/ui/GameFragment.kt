@@ -28,7 +28,7 @@ class GameFragment : Fragment() {
         ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
     }
 
-    private val imageIDsList = arrayListOf<Int>(
+    private val imageIDsList = arrayListOf(
         R.drawable.usa_dollar,
         R.drawable.dollar,
         R.drawable.bocket,
@@ -73,11 +73,7 @@ class GameFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         gameViewModel.imageList.observe(viewLifecycleOwner) {
-            for (image in imageIDsList) {
-                for (view in imageViews) {
-                    view.setImageResource(image)
-                }
-            }
+            generateSlotsTable(it)
         }
 
         with(binding) {
@@ -91,6 +87,11 @@ class GameFragment : Fragment() {
         }
     }
 
+    private fun generateSlotsTable(imageIds: List<Int>) {
+        for (position in 0 until imageViews.size) {
+            imageViews[position].setImageResource(imageIds[position])
+        }
+    }
 
     private fun increaseBetAmount() {
         gameViewModel.increaseBet()
