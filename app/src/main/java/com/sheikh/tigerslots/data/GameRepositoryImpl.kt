@@ -60,14 +60,8 @@ class GameRepositoryImpl(application: Application) : GameRepository {
         db.setProfit(profitAmount)
     }
 
-    override fun increaseBet() {
-        val betAmount = getBetAmount().value
-        val newBet = if (betAmount != null) {
-            betAmount + 1
-        } else {
-            DEFAULT_BET_AMOUNT
-        }
-        db.setBet(BetAmountDbModel(bet = newBet))
+    override fun increaseBet(betAmount: Int) {
+        db.setBet(BetAmountDbModel(bet = betAmount))
     }
 
     override fun startGame(

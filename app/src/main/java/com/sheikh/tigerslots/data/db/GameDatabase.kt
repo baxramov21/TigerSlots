@@ -14,7 +14,7 @@ import com.sheikh.tigerslots.data.db_models.*
         WinStateDbModel::class,
         ProfitAmountDbModel::class
     ],
-    version = 3,
+    version = 7,
     exportSchema = false
 )
 abstract class GameDatabase : RoomDatabase() {

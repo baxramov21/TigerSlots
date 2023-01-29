@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.content.ContentProviderCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.sheikh.tigerslots.R
 import com.sheikh.tigerslots.databinding.FragmentGameBinding
 import com.sheikh.tigerslots.presentation.ui.viewmodel.GameViewModel
 import com.sheikh.tigerslots.presentation.ui.viewmodel.ViewModelFactory
@@ -24,8 +28,35 @@ class GameFragment : Fragment() {
         ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
     }
 
-    private val betAmount by lazy {
-        gameViewModel.betAmount.value
+    private val imageIDsList = arrayListOf(
+        R.drawable.usa_dollar,
+        R.drawable.dollar,
+        R.drawable.bocket,
+        R.drawable.strawberry,
+        R.drawable.tarvuz,
+        R.drawable.real_coin,
+        R.drawable.pear,
+        R.drawable.pepe,
+        R.drawable.bomb,
+        R.drawable.brilliant
+    )
+
+    private val imageViews: ArrayList<ImageView> by lazy {
+        val list: ArrayList<ImageView>
+        with(binding) {
+            list = arrayListOf(
+                imageView,
+                imageView2,
+                imageView3,
+                imageView4,
+                imageView5,
+                imageView6,
+                imageView7,
+                imageView8,
+                imageView9
+            )
+        }
+        list
     }
 
     override fun onCreateView(
@@ -41,12 +72,13 @@ class GameFragment : Fragment() {
         binding.viewModel = gameViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        gameViewModel.deposit.observe(viewLifecycleOwner) {
-            binding.textViewDeposit.text = it.toString()
+        gameViewModel.imageList.observe(viewLifecycleOwner) {
+            generateSlotsTable(it)
         }
+
         with(binding) {
             buttonStartGame.setOnClickListener {
-
+                gameViewModel.startGame(imageIDsList)
             }
 
             buttonUpBet.setOnClickListener {
@@ -55,6 +87,11 @@ class GameFragment : Fragment() {
         }
     }
 
+    private fun generateSlotsTable(imageIds: List<Int>) {
+        for (position in 0 until imageViews.size) {
+            imageViews[position].setImageResource(imageIds[position])
+        }
+    }
 
     private fun increaseBetAmount() {
         gameViewModel.increaseBet()
