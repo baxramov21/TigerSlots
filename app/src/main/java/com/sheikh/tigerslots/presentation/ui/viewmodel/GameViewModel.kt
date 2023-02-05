@@ -17,7 +17,7 @@ class GameViewModel(private val application: Application) : ViewModel() {
     private val getWinAmountUseCase = GetWinAmountUseCase(repository)
 
     private val updateDepositUseCase = UpdateDepositUseCase(repository)
-    private val setProfitUseCase = SetProfitUseCase(repository)
+    private val generateProfitUseCase = GenerateProfitUseCase(repository)
     private val setWinStateUseCase = SetWinStateUseCase(repository)
 
     private val increaseBetUseCase = IncreaseBetUseCase(repository)
@@ -25,7 +25,17 @@ class GameViewModel(private val application: Application) : ViewModel() {
 
     private val _imagesList = MutableLiveData<List<Int>>()
     val imageList: LiveData<List<Int>>
-        get() = _imagesList ?: throw RuntimeException("_imagesList is null")
+        get() = _imagesList
+
+    private val _gameFinished = MutableLiveData<Boolean>()
+    val gameFinished: LiveData<Boolean>
+        get() = _gameFinished
+
+    private val _profit = MutableLiveData<Int>()
+    val profit4: LiveData<Int>
+        get() = _profit
+
+    private var firstStart = true
 
     val deposit = getDepositUseCase()
     val betAmount = getBetAmountUseCase()
@@ -34,17 +44,20 @@ class GameViewModel(private val application: Application) : ViewModel() {
     private var bet = 10
 
     init {
-        updateDeposit()
-        increaseBet()
-        setProfit(15)
+        if (firstStart) {
+            updateDeposit()
+            increaseBet()
+            setProfit()
+            firstStart = false
+        }
     }
 
     fun updateDeposit() {
         updateDepositUseCase()
     }
 
-    fun setProfit(profit: Int) {
-        setProfitUseCase(profit)
+    fun setProfit() {
+        generateProfitUseCase()
     }
 
     fun increaseBet() {
@@ -62,11 +75,13 @@ class GameViewModel(private val application: Application) : ViewModel() {
             SLOTS_GENERATION_INTERVAL_IN_MILLI_SECONDS
         ) {
             override fun onTick(p0: Long) {
+                _gameFinished.postValue(false)
                 _imagesList.postValue(startGameUseCase(listOfImageIDs))
             }
 
             override fun onFinish() {
                 _imagesList.postValue(startGameUseCase(listOfImageIDs))
+                _gameFinished.postValue(true)
             }
         }
         timer.start()

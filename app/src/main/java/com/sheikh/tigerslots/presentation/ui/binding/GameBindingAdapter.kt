@@ -25,5 +25,4 @@ fun bindWinAmount(textView: TextView, profit: Int) {
     textView.text = winAmountText
 }
 
-
 private fun getResources(textView: TextView): Resources = textView.context.resources

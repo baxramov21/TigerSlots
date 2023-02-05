@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.content.ContentProviderCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.sheikh.tigerslots.R
@@ -43,7 +41,7 @@ class GameFragment : Fragment() {
 
     private val imageViews: ArrayList<ImageView> by lazy {
         val list: ArrayList<ImageView>
-        with(binding) {
+        with(binding.slotsTable) {
             list = arrayListOf(
                 imageView,
                 imageView2,
@@ -79,12 +77,31 @@ class GameFragment : Fragment() {
         with(binding) {
             buttonStartGame.setOnClickListener {
                 gameViewModel.startGame(imageIDsList)
+                gameViewModel.setProfit()
+                changeViewAvailability(it, false)
+            }
+
+            gameViewModel.profit.observe(viewLifecycleOwner) {
+                val winAmount =
+                    String.format(getString(R.string.win_amount), it)
+                textViewWinAmount.text = winAmount
             }
 
             buttonUpBet.setOnClickListener {
                 increaseBetAmount()
             }
+
+            gameViewModel.gameFinished.observe(viewLifecycleOwner) {
+                if (true) {
+                    gameViewModel.updateDeposit()
+                }
+                buttonStartGame.isEnabled = it
+            }
         }
+    }
+
+    private fun changeViewAvailability(view: View, enabled: Boolean) {
+        view.isEnabled = enabled
     }
 
     private fun generateSlotsTable(imageIds: List<Int>) {
