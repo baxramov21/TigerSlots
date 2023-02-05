@@ -17,7 +17,7 @@ interface GameRepository {
 
     fun updateDeposit()
 
-    fun setProfit(profit: Int)
+    fun setProfit()
 
     fun setWinState(win: Boolean)
 }

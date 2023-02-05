@@ -6,12 +6,15 @@
         <item name="layout_rowWeight">1</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_width">0dp</item>
+        <item name="android:layout_margin">8dp</item>
     </style>
 
     <style name="image_view_style">
+        <item name="android:src">@drawable/brilliant</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">match_parent</item>
         <item name="contentDescription">@string/content_description</item>
+        <item name="android:padding">8dp</item>
     </style>
 
     <string name="content_description">Element on slots table</string>

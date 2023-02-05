@@ -10,6 +10,7 @@ import com.sheikh.tigerslots.data.db_models.ProfitAmountDbModel
 import com.sheikh.tigerslots.data.db_models.WinStateDbModel
 import com.sheikh.tigerslots.data.mappers.Mapper
 import com.sheikh.tigerslots.domain.repository.GameRepository
+import kotlin.random.Random
 
 class GameRepositoryImpl(application: Application) : GameRepository {
 
@@ -36,10 +37,15 @@ class GameRepositoryImpl(application: Application) : GameRepository {
         db.setDeposit(newDeposit)
     }
 
+    private fun getLDValue(liveData: LiveData<Int>): Int {
+        val result = liveData.value
+        return result ?: 0
+    }
+
     override fun updateDeposit() {
-        val deposit = getDeposit().value
-        val betAmount = getBetAmount().value
-        val profit = getWinAmount().value
+        val deposit = getLDValue(getDeposit())
+        val betAmount = getLDValue(getBetAmount())
+        val profit = getLDValue(getWinAmount())
         if (deposit != null && betAmount != null &&
             profit != null
         ) {
@@ -55,8 +61,15 @@ class GameRepositoryImpl(application: Application) : GameRepository {
         db.setWin(winState)
     }
 
-    override fun setProfit(profit: Int) {
-        val profitAmount = ProfitAmountDbModel(profit = profit)
+    override fun setProfit() {
+        val win = Random.nextBoolean()
+        val randomProfit = if (win) {
+            Random.nextInt(MIN_PROFIT_AMOUNT, MAX_PROFIT_AMOUNT)
+        } else {
+            BET_LOST
+
+        }
+        val profitAmount = ProfitAmountDbModel(profit = randomProfit)
         db.setProfit(profitAmount)
     }
 
@@ -75,6 +88,8 @@ class GameRepositoryImpl(application: Application) : GameRepository {
     }
 
     companion object {
-        private const val DEFAULT_BET_AMOUNT = 10
+        private const val BET_LOST = 0
+        private const val MIN_PROFIT_AMOUNT = 10
+        private const val MAX_PROFIT_AMOUNT = 60
     }
 }
