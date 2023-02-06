@@ -19,7 +19,7 @@ interface GameDao {
     @Query("SELECT * FROM bet_table ORDER BY id DESC LIMIT 1")
     fun getBet(): LiveData<BetAmountDbModel>
 
-    @Query("SELECT * FROM profit_table")
+    @Query("SELECT * FROM profit_table ORDER BY id DESC LIMIT 1")
     fun getProfit(): LiveData<ProfitAmountDbModel>
 
     @Insert()
