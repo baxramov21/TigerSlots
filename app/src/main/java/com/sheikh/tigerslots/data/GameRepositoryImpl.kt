@@ -37,23 +37,14 @@ class GameRepositoryImpl(application: Application) : GameRepository {
         db.setDeposit(newDeposit)
     }
 
-    private fun getLDValue(liveData: LiveData<Int>): Int {
-        val result = liveData.value
-        return result ?: 0
-    }
-
-    override fun updateDeposit() {
-        val deposit = getLDValue(getDeposit())
-        val betAmount = getLDValue(getBetAmount())
-        val profit = getLDValue(getWinAmount())
-        if (deposit != null && betAmount != null &&
-            profit != null
+    override fun updateDeposit(deposit: Int, bet: Int, profit: Int) {
+        val newDeposit = if (bet != DEFAULT_BET_AND_PROFIT
         ) {
-            val newDeposit = (deposit - betAmount) + profit
-            setDeposit(newDeposit)
-        } else if (deposit == null) {
-            setDeposit(100)
+            deposit + (profit - bet)
+        } else {
+            DEFAULT_DEPOSIT
         }
+        setDeposit(newDeposit)
     }
 
     override fun setWinState(win: Boolean) {
@@ -88,8 +79,10 @@ class GameRepositoryImpl(application: Application) : GameRepository {
     }
 
     companion object {
+        private const val DEFAULT_BET_AND_PROFIT = 0
+        private const val DEFAULT_DEPOSIT = 100
         private const val BET_LOST = 0
         private const val MIN_PROFIT_AMOUNT = 10
-        private const val MAX_PROFIT_AMOUNT = 60
+        private const val MAX_PROFIT_AMOUNT = 40
     }
 }

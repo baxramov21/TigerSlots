@@ -31,10 +31,6 @@ class GameViewModel(private val application: Application) : ViewModel() {
     val gameFinished: LiveData<Boolean>
         get() = _gameFinished
 
-    private val _profit = MutableLiveData<Int>()
-    val profit4: LiveData<Int>
-        get() = _profit
-
     private var firstStart = true
 
     val deposit = getDepositUseCase()
@@ -45,18 +41,18 @@ class GameViewModel(private val application: Application) : ViewModel() {
 
     init {
         if (firstStart) {
-            updateDeposit()
-            increaseBet()
-            setProfit()
             firstStart = false
+            updateDeposit(100, 0)
+            increaseBet()
+            generateProfit()
         }
     }
 
-    fun updateDeposit() {
-        updateDepositUseCase()
+    fun updateDeposit(deposit: Int, profit: Int) {
+        updateDepositUseCase(deposit, bet, profit)
     }
 
-    fun setProfit() {
+    fun generateProfit() {
         generateProfitUseCase()
     }
 

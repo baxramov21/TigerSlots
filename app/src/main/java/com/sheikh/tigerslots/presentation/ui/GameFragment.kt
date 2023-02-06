@@ -26,6 +26,9 @@ class GameFragment : Fragment() {
         ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
     }
 
+    private var deposit = 0
+    private var profit = 0
+
     private val imageIDsList = arrayListOf(
         R.drawable.usa_dollar,
         R.drawable.dollar,
@@ -77,14 +80,16 @@ class GameFragment : Fragment() {
         with(binding) {
             buttonStartGame.setOnClickListener {
                 gameViewModel.startGame(imageIDsList)
-                gameViewModel.setProfit()
-                changeViewAvailability(it, false)
+                changeViewEnabled(it, false)
+            }
+
+            gameViewModel.deposit.observe(viewLifecycleOwner) {
+                deposit = it
             }
 
             gameViewModel.profit.observe(viewLifecycleOwner) {
-                val winAmount =
-                    String.format(getString(R.string.win_amount), it)
-                textViewWinAmount.text = winAmount
+                profit = it
+                gameViewModel.updateDeposit(deposit,it)
             }
 
             buttonUpBet.setOnClickListener {
@@ -92,15 +97,16 @@ class GameFragment : Fragment() {
             }
 
             gameViewModel.gameFinished.observe(viewLifecycleOwner) {
-                if (true) {
-                    gameViewModel.updateDeposit()
+                if (it) {
+                    gameViewModel.generateProfit()
+                    gameViewModel.updateDeposit(deposit, profit)
                 }
                 buttonStartGame.isEnabled = it
             }
         }
     }
 
-    private fun changeViewAvailability(view: View, enabled: Boolean) {
+    private fun changeViewEnabled(view: View, enabled: Boolean) {
         view.isEnabled = enabled
     }
 
